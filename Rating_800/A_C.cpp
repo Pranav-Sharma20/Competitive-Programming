@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve()
+{
+
+    int a, b, target, ans = 0;
+    cin >> a >> b >> target;
+
+    while (a <= target && b <= target)
+    {
+        if (a < b)
+        {
+            a += b;
+        }
+        else
+        {
+            b += a;
+        }
+        ans++;
+    }
+    cout << ans << "\n";
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        solve();
+    }
+    return 0;
+}
