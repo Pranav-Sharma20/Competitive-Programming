@@ -8,10 +8,10 @@ void solve()
     vector<int> ans(n);
     int sum = 0, a = 0;
 
-    for (auto &it : ans)
+    for (auto &i : ans)
     {
-        cin >> it;
-        sum += it;
+        cin >> i;
+        sum += i;
     }
 
     int ind = 1;

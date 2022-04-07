@@ -20,7 +20,7 @@ void solve()
 
     if (flag)
     {
-        cout << 0 << endl;
+        cout << 0 << "\n";
         return;
     }
 

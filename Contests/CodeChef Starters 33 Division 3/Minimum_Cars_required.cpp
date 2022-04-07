@@ -6,9 +6,9 @@ void solve()
     int n;
     cin >> n;
 
-    int rem = n % 4;
+    int remi = n % 4;
 
-    if (rem == 0)
+    if (remi == 0)
     {
         cout << n / 4 << endl;
     }
