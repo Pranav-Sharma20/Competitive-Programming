@@ -6,47 +6,51 @@ typedef long long ll;
 #define forr(i, n) for (int i = n; i >=0; --i)
 
 
-
-
-void solve() {
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    vector<int> ar(n);
-    for(auto &i: a){
-        cin >> i;
-    }
-
-    if(n%2 == 1){
-        cout << "NO\n";
-        return;
-    }
-
-    sort(a.begin(), a.end());
-    int ind = 0;
-
-    for(int i=0; i<n/2; i++){
-        // cout << a[i] << " " << a[(n/2)+i] << " ";
-        ar[ind+i] = a[i];
-        ar[ind+i+1] = a[(n/2)+i];
-        ind++;
-    }
-
-
-    for(int i =1; i< n-1; i+=2){
-        if(ar[i-1]>= ar[i] || ar[i+1]<= ar[i]){
-            cout << "NO\n" ;
-            return;
+// dfs function 
+long long depth_first_search(long long index, long long fir_kya_hi_kro,map<long long,vector<long long>> &shit,vector<long long> &listings,vector<long long> &inter,vector<long long> &final){
+    long long ginti = listings[index];
+    long long sum=0;
+    for(auto& i: shit[index]){
+        if(i!=fir_kya_hi_kro){
+            long long curr = depth_first_search(i,index,shit,listings,inter,final);
+            sum+=curr;
+            ginti = __gcd(ginti,curr);
         }
     }
+    inter[index]=ginti;
+    final[index]=sum;
+    return ginti;
+}
 
-    cout << "YES\n";
-
-    for(auto i : ar){
-        cout << i << " ";
+// searcher 
+void searcher(long long index,long long fir_kya_hi_kro,long long su,map<long long,vector<long long>> &shit,vector<long long> &listings,vector<long long> &inter,vector<long long> &final,long long &ginti_fin){
+    ginti_fin = max(ginti_fin,su);
+    for(auto& i: shit[index]){
+        if(i!=fir_kya_hi_kro)searcher(i,index,su-inter[i]+final[i],shit,listings,inter,final,ginti_fin);
     }
-    cout << endl;
-    return;
+}
+
+// solving 
+void solve(){
+    long long n;
+    cin>>n;
+    vector<long long> listings(n);
+    vector<long long> inter(n);
+    vector<long long> final(n);
+    long long ginti_fin=0;
+    map<long long,vector<long long>> shit;
+    for (long long i = 0; i<n; ++i) {
+        cin>>listings[i];
+    }
+    for(long long i=0;i<n-1;i++){
+        long long x,y;
+        cin>>x>>y;x--;y--;
+        shit[x].push_back(y);
+        shit[y].push_back(x);
+    }
+    long long ok = depth_first_search(0,-1,shit,listings,inter,final);
+    searcher(0,-1,final[0],shit,listings,inter,final,ginti_fin);
+    cout<<ginti_fin<<endl;
 }
 
 
