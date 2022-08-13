@@ -5,38 +5,38 @@ typedef long long ll;
 #define forn(i, n) for (int i = 0; i < n; i++)
 #define forr(i, n) for (int i = n; i >=0; --i)
 
-int helper(vector<int> arr, int mx, int curr, int ind, int n){
-    if(ind == n){
-        return 0;
-    }
-
-}
 
 void solve() {
-    int n, k;
-    cin >> n >> k;
+    int n, x;
+    cin >> n >> x;
     
-    vector<int>even;
-    vector<int>odd;
-    int n = even.size();
-    int m = odd.size();
+    vector<ll> arr;
+    unordered_map<ll,ll> umap;
 
     for(int i=0; i<n; i++){
-        int temp;
-        cin >> temp;
-        if(temp&1){
-            odd.push_back(temp);
-        } else{
-            even.push_back(temp);
+        ll ele;
+        cin >> ele;
+
+        arr.push_back(ele);
+        umap[ele]++;
+    }
+    sort(arr.begin(), arr.end());
+    ll ans = 0;
+    for(auto i:arr){
+        ll mul = i*x;
+        if(umap.count(mul) && umap.count(i)){
+            ans+=2;
+            umap[i]--;
+            umap[mul]--;
+            if(umap[mul] == 0){
+                umap.erase(mul);
+            }
+            if(umap[i] == 0){
+                umap.erase(i);
+            }
         }
     }
-    sort(even.begin(), even.end());
-    sort(odd.begin(), odd.end());
-
-    // cout << helper(even,0,0,0,n) << endl;
-    // cout << helper(odd,0,0,0,m) << endl;
-
-    
+    cout << n-ans << endl;
 }
 
 
