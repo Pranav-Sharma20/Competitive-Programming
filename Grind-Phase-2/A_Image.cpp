@@ -8,31 +8,32 @@ typedef long long ll;
     //cout << i.first << ' ' << i.second << endl;
 //cout << endl;
 
-/*           -> 3 1 1 0  prefix
-    1 3 4 2  -> 0 1 2 1  suffix
-             -> 3 2 3 1  sum
 
-             -> 2 2 1 0  prefix
-    3 4 2 1  -> 0 1 1 0  suffix
-             -> 2 3 2 1  sum  
-    4 2 1 3
-    4 1 3 2
-    4 3 2 1
-    4 2 1 3
-
-    round = 3 (n-1)
-
-    1 2 3 5 4 
-
-
-    1 2 3 5 4
-
-*/
 
 
 void solve() {
-   
+    char a, b ,c ,d;
 
+    cin >> a >> b >> c >> d;
+
+    unordered_map<char, int> umap;
+
+    umap[a]++;
+    umap[b]++;
+    
+
+    umap[c]++;
+    umap[d]++;
+
+    if(umap.size() == 4){
+        cout << "3\n";
+    }else if(umap.size() == 3){
+        cout << "2\n";
+    }else if(umap.size() == 2){
+        cout << "1\n";
+    }else{
+        cout << "0\n";
+    }
 }
 
 
